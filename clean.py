@@ -18,7 +18,7 @@ pd.read_excel('OVERALL_GRADRATE2023_2 (2).xlsx')
 
 # Step 6: Create a column that takes schools within the same district and calculates their graduation rate (not sure how to do this mathematically)
 
-# In the end, you should have a file that has the overall graduation rate for each school district and graduation rates by race for each school district
+# In the end, you should have a file that has the graduation rates by race for each school district (overall probably isn't helpful since you're not included all races in your analysis)
 
 
 
