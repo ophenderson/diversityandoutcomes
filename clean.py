@@ -8,6 +8,7 @@ import pandas as pd
 pd.read_excel('OVERALL_GRADRATE2023_2 (2).xlsx')
 
 # Step 2: Get rid of columns you don't need
+## All columns except - overall, black, white, hispanic
 
 # Step 3: Get rid of school districts that are not on the most recent census shp file (how to do this?)
 
