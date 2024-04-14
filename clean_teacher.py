@@ -7,7 +7,7 @@ def fetch_and_clean(repo_owner, repo_name, folder_path, file_name, branch = 'mai
     excel_file = BytesIO(excel_bytes)
     teacherdf = pd.read_excel(excel_file)
     teacherdf['YEAR'] = YEAR # once again, not sure how to make sure this is done differently for each file
-    keep_cols = ['DISTRICT ID', 'SCHOOL DISTRICT/CAREER CENTER', 'WHITE MALES', 'WHITE FEMALES', 'WHITE GENDER NOT REPORTED', 'BLACK MALES', 'BLACK FEMALES', 'BLACK GENDER NOT REPORTED','HISPANIC MALES', 'HISPANIC FEMALES', 'HISPANIC GENDER NOT REPORTED')
+    keep_cols = ['DISTRICT ID', 'SCHOOL DISTRICT/CAREER CENTER', 'WHITE MALES', 'WHITE FEMALES', 'WHITE GENDER NOT REPORTED', 'BLACK MALES', 'BLACK FEMALES', 'BLACK GENDER NOT REPORTED','HISPANIC MALES', 'HISPANIC FEMALES', 'HISPANIC GENDER NOT REPORTED', 'TOTAL NUMBER OF TEACHERS')
     totalw = teacherdf['WHITE MALES', "WHITE FEMALES", "WHITE GENDER NOT REPORTED"].sum(axis=1)
     totalb = teacherdf['BLACK MALES', "BLACK FEMALES", "BLACK GENDER NOT REPORTED"].sum(axis=1)
     totalh = teacherdf['HISPANIC MALES', "HISPANIC FEMALES", "HISPANIC GENDER NOT REPORTED"].sum(axis=1)
