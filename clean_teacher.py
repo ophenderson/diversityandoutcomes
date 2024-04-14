@@ -16,10 +16,3 @@ def fetch_and_clean(repo_owner, repo_name, folder_path, file_name, branch = 'mai
   else:
     print(f"Failed to fetch and clean file: {response.status_code} - {response.reason}")
     return None 
-    graddf = graddf[keep_cols]
-    graddf.fillna('N/A')
-    graddf.replace('-1', 'N/A')
-    graddf.replace('-1.00', 'N/A')
-  else:
-    print(f"Failed to fetch and clean file: {response.status_code} - {response.reason}")
-    return None
