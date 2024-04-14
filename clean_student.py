@@ -1,4 +1,4 @@
-# Defining a function that fetches and cleans teacher diversity files
+# Defining a function that fetches and cleans student diversity files
 def fetch_and_clean(repo_owner, repo_name, folder_path, file_name, branch = 'main')
   url = f"https://raw.githubusercontent.com/{repo_owner}/{repo_name}/{branch}/{folder_path}/{file_name}"
   response = requests.get('url')
