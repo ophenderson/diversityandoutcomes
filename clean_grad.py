@@ -1,32 +1,34 @@
 # Importing
 import pandas as pd
 import requests
+from io import BytesIO
 
 
-pd.read_excel('Grad Rate 202-2023.xlsx')
+# Defining a function that fetches and cleans graduation rate files
+def fetch_and_clean(repo_owner, repo_name, folder_path, file_name, branch = 'main')
+  url = f"https://raw.githubusercontent.com/{repo_owner}/{repo_name}/{branch}/{folder_path}/{file_name}"
+  response = requests.get('url')
+  if response.status_code == 200
+    excel_bytes = response.content
+    excel_file = BytesIO(excel_bytes)
+    graddf = pd.read_excel(excel_file)
+    graddf['BEDSCODE'] = Year # the idea for this was that I would replace the BEDSCODE column with the school year that the data is from, not sure how to do this?
+    graddf.rename(columns={'BEDSCODE':'YEAR'}, inplace=True)
+    keep_cols = ['DISTRICT', 'SCHOOL', 'GNUMERATOR_RACE_W', 'GDENOM_RACE_W', 'GNUMERATOR_RACE_B', 'GDENOM_RACE_B', 'GNUMERATOR_RACE_H', 'GDENOM_RACE_H')
+    graddf = graddf[keep_cols]
+    graddf.fillna('N/A')
+    graddf.replace('-1', 'N/A')
+    graddf.replace('-1.00', 'N/A')
+  else:
+    print(f"Failed to fetch and clean file: {response.status_code} - {response.reason}")
+    return None
+
+# Cleaning the file
+pd.read
 
 
-# Defining a function but IDK
-repo_url = https://github.com/ophenderson/diverstiyandoutcomes.git
-folder_path = 'diverstyandoutcomes'/2022-2023
-file_name = 'Grad Rate 2022-2023.xlsx'
-def fetch_github_file(repo_url,folder_path,file_name):
-
-# Fetching the file
-raw_file= f"{https://github.com/ophenderson/diversityandoutcomes.git}/raw/main/{folder_path}/{file_name}
-response = requests.get(raw_file)
-# Turning it into a dataframe?
-df = pd.read_excel(response.content)
-df = pd.DataFrame(df)
-# Dropping unneeded columns - there has to be a way to do this without listing out every column that needs to be dropped
-def drop_columns_containing(df,words)
-columns_to_drop = [col for col in df.columns if any(word in col for word in words)]
-df = df.drop(columns=columns_to_drop)
-return df
-if __name__ == "__main__":
-words_to_drop = ['BEDS','GENDER', 'DISABLED']
-
-# Grouping by district
+  
 
 
-# Look at the file, does anymore cleaning need to be done?
+
+
