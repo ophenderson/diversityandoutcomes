@@ -23,8 +23,11 @@ def fetch_and_clean(repo_owner, repo_name, folder_path, file_name, branch = 'mai
     print(f"Failed to fetch and clean file: {response.status_code} - {response.reason}")
     return None
 
-# Cleaning the file
-pd.read
+# Trying to do this with API
+
+api = 
+
+
 
 
   
