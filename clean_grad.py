@@ -2,6 +2,8 @@
 import pandas as pd
 import requests
 from io import BytesIO
+import glob
+import os
 
 
 # Defining a function that fetches and cleans graduation rate files
@@ -23,9 +25,13 @@ def fetch_and_clean(repo_owner, repo_name, folder_path, file_name, branch = 'mai
     print(f"Failed to fetch and clean file: {response.status_code} - {response.reason}")
     return None
 
-# Trying to do this with API
+# Trying another method??
 
-api = 
+glob.glob('raw/OVERALL_GRADRATE*.xlsx')
+case1 = 'raw/bg_single.xlsx'
+wb1 = pd.read_excel(case1)
+print(f'\nCase 1, single sheet: {case1}\n')
+print(wb1.head())
 
 
 
