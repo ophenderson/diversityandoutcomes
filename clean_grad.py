@@ -26,9 +26,8 @@ def fetch_and_clean(repo_owner, repo_name, folder_path, file_name, branch = 'mai
     return None
 
 # Trying another method??
-
 glob.glob('raw/OVERALL_GRADRATE*.xlsx')
-case1 = 'raw/bg_single.xlsx'
+case1 = 'raw/OVERALL_GRADRATE1718.xlsx'
 wb1 = pd.read_excel(case1)
 print(f'\nCase 1, single sheet: {case1}\n')
 print(wb1.head())
