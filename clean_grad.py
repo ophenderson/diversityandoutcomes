@@ -2,24 +2,6 @@
 import pandas as pd
 import requests
 
-# 
-def fetch(repo_owner, repo_name, path_to_file):
-    url = f"https://api.github.com/repos/{repo_owner}/{repo_name}/contents/{path_to_file}"
-    response = requests.get(url)
-    if response.status_code == 200:
-        content = response.json()['content']
-        file_content = base64.b64decode(content).decode('utf-8')
-        return file_content
-    else: 
-        return None
-    
-repo_owner = 'ophenderson'
-repo_name = 'diversityandoutcomes'
-path_to_file = raw/OVERALL_GRADRATE1718.xlsx
-file_content = fetch(repo_owner, repo_name, path_to_file)
-if file_content:
-    print(file_content)
-#%%
 
     
     
