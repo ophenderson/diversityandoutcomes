@@ -34,7 +34,7 @@ file_content = get(owner, repo, folder_path, file_name)
 if file_content:
     # Now you have the content of the file, you can further process it as needed
     pd.read_excel(file_name)
-
+#%%
     
     
     
