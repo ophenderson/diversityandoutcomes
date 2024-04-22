@@ -1,6 +1,43 @@
 # Importing
 import pandas as pd
+import glob
+import os
 
+# Making a list of teacher files
+# Changed the names of the files to match each other
+teacher_files = glob.glob('raw/SOUTH CAROLINA TEACHERS BY RACE AND GENDER*')
+
+# Function 
+def read_teacher_file(fname):
+    # Reading the excel file
+    raw = pd.read_excel(fname)
+    # Information about the file
+    info = len(raw)
+    print('Number of entries:' ,fname, info)
+    return raw
+
+data_list = {}
+
+for fname in teacher_files:
+    teacher = read_teacher_file(fname)
+    (basename, ext) = os.path.splitext(fname)
+    tail = basename[-2:]
+    data_list[tail]=teacher
+    dataset = pd.concat(data_list)
+    dataset = dataset.reset_index(0)
+    dataset = dataset.rename(columns={'level_0':'Year'})
+    # need to drop the bottom rows and then the numbers should align with the student data.... eeeeee!!!!
+
+#%%
+
+# Importing
+import pandas as pd
+import glob
+
+# Making a list of teacher files
+# Changed the names of the files to match each other
+teacher_files = glob.glob('raw/SOUTH CAROLINA TEACHERS BY RACE AND GENDER*')
+#%%
 # Reading in a file
 teacherdf = pd.read_excel('raw/SOUTH CAROLINA TEACHERS BY RACE AND GENDER FOR THE 2017-18 SCHOOL YEAR (HEADCOUNT BY SCHOOL DISTRICT), MARCH 29, 2019.xlsx')
 

@@ -2,29 +2,41 @@
 
 # Importing 
 import pandas as pd
-import requests
+import glob
+import os
 
-# Reading in a file
-graddf1718 = pd.read_excel('raw/OVERALL_GRADRATE1718.xlsx')
+# Making a list of all the grad rate files from raw folder
+# In order to make this easier to do, I changed the names of the 2023 file to be match the format of the others
+grad_files = glob.glob('raw/OVERALL_GRADRATE*')
 
-# Performing cleaning functions
- # Adding year column, won't add year column
-year = '2017-2018'
-graddf1718['Year'] = year
 
-# Keeping only the columns I need
-keep_cols = ['DISTRICT', 'SCHOOL', 'GNUMERATOR_RACE_W', 'GDENOM_RACE_W', 'GNUMERATOR_RACE_B', 'GDENOM_RACE_B', 'GNUMERATOR_RACE_H', 'GDENOM_RACE_H']
-graddf1718 = graddf1718[keep_cols]
+# Function 
+def read_grad_file(fname):
+    # Reading the excel file
+    raw = pd.read_excel(fname)
+                        # skiprows=[0]) for student
+    # Information about the file
+    info = len(raw)
+    print('Number of entries:' ,fname, info)
+    return raw
 
-# Filling in missing values and replacing negatives with 0
-graddf1718.fillna('NaN')
-graddf1718 = graddf1718.replace(-1, 0)
+data_list = {}
 
-# Creating a columns that calculates the graduation rate for each race
-graddf1718['Graduation Rate - W'] = graddf1718['GNUMERATOR_RACE_W']/graddf1718['GDENOM_RACE_W']
-graddf1718['Graduation Rate - B'] = graddf1718['GNUMERATOR_RACE_B']/graddf1718['GDENOM_RACE_B']
-graddf1718['Graduation Rate - H'] = graddf1718['GNUMERATOR_RACE_H']/graddf1718['GDENOM_RACE_H']
-
+for fname in grad_files:
+    grad = read_grad_file(fname)
+    (basename, ext) = os.path.splitext(fname)
+    tail = basename[-2:]
+    data_list[tail]=grad
+    dataset = pd.concat(data_list)
+    dataset = dataset.reset_index(0)
+    dataset = dataset.rename(columns={'level_0':'Year'})
+    keep_cols = ['Year', 'DISTRICT', 'SCHOOL', 'GNUMERATOR_RACE_W', 'GDENOM_RACE_W', 'GNUMERATOR_RACE_B', 'GDENOM_RACE_B', 'GNUMERATOR_RACE_H', 'GDENOM_RACE_H']
+    dataset = dataset[keep_cols]
+    dataset.fillna('NaN')
+    dataset = dataset.replace(-1, 0)
+    dataset['Graduation Rate - W'] = dataset['GNUMERATOR_RACE_W']/dataset['GDENOM_RACE_W']
+    dataset['Graduation Rate - B'] = dataset['GNUMERATOR_RACE_B']/dataset['GDENOM_RACE_B']
+    dataset['Graduation Rate - H'] = dataset['GNUMERATOR_RACE_H']/dataset['GDENOM_RACE_H']
 
 
   
