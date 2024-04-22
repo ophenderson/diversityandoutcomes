@@ -1,18 +1,16 @@
-# Defining a function that fetches and cleans teacher diversity files
-def fetch_and_clean(repo_owner, repo_name, folder_path, file_name, branch = 'main')
-  url = f"https://raw.githubusercontent.com/{repo_owner}/{repo_name}/{branch}/{folder_path}/{file_name}"
-  response = requests.get('url')
-  if response.status_code == 200
-    excel_bytes = response.content
-    excel_file = BytesIO(excel_bytes)
-    teacherdf = pd.read_excel(excel_file)
-    teacherdf['YEAR'] = YEAR # once again, not sure how to make sure this is done differently for each file
-    keep_cols = ['DISTRICT ID', 'SCHOOL DISTRICT/CAREER CENTER', 'WHITE MALES', 'WHITE FEMALES', 'WHITE GENDER NOT REPORTED', 'BLACK MALES', 'BLACK FEMALES', 'BLACK GENDER NOT REPORTED','HISPANIC MALES', 'HISPANIC FEMALES', 'HISPANIC GENDER NOT REPORTED', 'TOTAL NUMBER OF TEACHERS')
-    totalw = teacherdf['WHITE MALES', "WHITE FEMALES", "WHITE GENDER NOT REPORTED"].sum(axis=1)
-    totalb = teacherdf['BLACK MALES', "BLACK FEMALES", "BLACK GENDER NOT REPORTED"].sum(axis=1)
-    totalh = teacherdf['HISPANIC MALES', "HISPANIC FEMALES", "HISPANIC GENDER NOT REPORTED"].sum(axis=1)
-    teacherdf = teacherdf[keep_cols]
-    teacherdf.fillna('N/A')
-  else:
-    print(f"Failed to fetch and clean file: {response.status_code} - {response.reason}")
-    return None 
+# Importing
+import pandas as pd
+
+# Reading in a file
+teacherdf = pd.read_excel('raw/SOUTH CAROLINA TEACHERS BY RACE AND GENDER FOR THE 2017-18 SCHOOL YEAR (HEADCOUNT BY SCHOOL DISTRICT), MARCH 29, 2019.xlsx')
+
+# Performing cleaning functions
+teacherdf['YEAR'] = '2017-2018' # once again, not sure how to make sure this is done differently for each file and also j
+keep_cols = ['DISTRICT ID', 'SCHOOL DISTRICT/ CAREER CENTER', 'WHITE MALES', 'WHITE FEMALES', 'WHITE GENDER NOT REPORTED', 'BLACK MALES', 'BLACK FEMALES', 'BLACK GENDER NOT REPORTED','HISPANIC MALES', 'HISPANIC FEMALES', 'HISPANIC GENDER NOT REPORTED', 'TOTAL NUMBER OF TEACHERS']
+teacherdf = teacherdf[keep_cols]
+teacherdf['totalw'] = teacherdf['WHITE MALES'] + teacherdf["WHITE FEMALES"] + teacherdf["WHITE GENDER NOT REPORTED"]
+teacherdf['totalb'] = teacherdf['BLACK MALES'] + teacherdf["BLACK FEMALES"] + teacherdf["BLACK GENDER NOT REPORTED"]
+teacherdf ['totalh'] = teacherdf['HISPANIC MALES'] + teacherdf["HISPANIC FEMALES"] + teacherdf["HISPANIC GENDER NOT REPORTED"]
+teacherdf = teacherdf.drop(columns =['WHITE MALES', 'WHITE FEMALES', 'WHITE GENDER NOT REPORTED', 'BLACK MALES', 'BLACK FEMALES', 'BLACK GENDER NOT REPORTED','HISPANIC MALES', 'HISPANIC FEMALES', 'HISPANIC GENDER NOT REPORTED'])
+teacherdf.fillna('N/A')
+
