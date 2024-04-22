@@ -19,8 +19,8 @@ def read_grad_file(fname):
     info = len(raw)
     print('Number of entries:' ,fname, info)
     return raw
-
-data_list = {}
+# need to go through and make these grad specific
+grad_data_list = {}
 
 for fname in grad_files:
     grad = read_grad_file(fname)
@@ -38,7 +38,7 @@ for fname in grad_files:
     dataset['Graduation Rate - B'] = dataset['GNUMERATOR_RACE_B']/dataset['GDENOM_RACE_B']
     dataset['Graduation Rate - H'] = dataset['GNUMERATOR_RACE_H']/dataset['GDENOM_RACE_H']
 
-
+# dataset = dataset.groupby('DISTRICT') - figure out how to group by district name, prof gave us a sheet with this code
   
 
 

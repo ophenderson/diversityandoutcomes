@@ -15,7 +15,7 @@ def read_teacher_file(fname):
     info = len(raw)
     print('Number of entries:' ,fname, info)
     return raw
-
+# need to go through and make these teacher specific
 data_list = {}
 
 for fname in teacher_files:
