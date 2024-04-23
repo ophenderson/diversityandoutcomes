@@ -10,7 +10,7 @@ student_files = glob.glob('raw/*District Headcount by Gender, Ethnicity and Pupi
 # Function 
 def read_student_file(fname):
     # Reading the excel file
-    raw = pd.read_excel(fname, skiprows=[0])
+    raw = pd.read_excel(fname)
     # Information about the file
     info = len(raw)
     print('Number of entries:' ,fname, info)
@@ -23,9 +23,10 @@ for fname in student_files:
     (basename, ext) = os.path.splitext(fname)
     tail = basename[-2:]
     student_data_list[tail]=student
-    dataset = pd.concat(student_data_list)
-    dataset = dataset.reset_index(0)
-    dataset = dataset.rename(columns={'level_0':'Year'})
+    student_dataset = pd.concat(student_data_list)
+    student_dataset = student_dataset.reset_index(0)
+    #%%
+    student_dataset = student_dataset.rename(columns={'level_0':'Year'})
    
 #%%   
     
