@@ -34,11 +34,10 @@ grad_dataset.fillna('NaN')
 grad_dataset = grad_dataset.replace(-1, 0)
 grad_dataset = grad_dataset.query("SCHOOL != 'DISTRICT NO CHARTER' & SCHOOL != 'DISTRICT WITH CHARTER'")
 grad_dataset = grad_dataset.drop('SCHOOL', axis=1)
-by_dist = grad_dataset.groupby(['Year', 'DISTRICT']).sum()
-by_dist['Graduation Rate - W'] = by_dist['GNUMERATOR_RACE_W']/by_dist['GDENOM_RACE_W']
-by_dist['Graduation Rate - B'] = by_dist['GNUMERATOR_RACE_B']/by_dist['GDENOM_RACE_B']
-by_dist['Graduation Rate - H'] = by_dist['GNUMERATOR_RACE_H']/by_dist['GDENOM_RACE_H']
+grad_by_dist = grad_dataset.groupby(['Year', 'DISTRICT']).sum()
+grad_by_dist['Graduation Rate - W'] = grad_by_dist['GNUMERATOR_RACE_W']/grad_by_dist['GDENOM_RACE_W']
+grad_by_dist['Graduation Rate - B'] = grad_by_dist['GNUMERATOR_RACE_B']/grad_by_dist['GDENOM_RACE_B']
+grad_by_dist['Graduation Rate - H'] = grad_by_dist['GNUMERATOR_RACE_H']/grad_by_dist['GDENOM_RACE_H']
 
 
-len(by_dist)
 
