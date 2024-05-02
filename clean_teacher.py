@@ -37,7 +37,7 @@ teacher_dataset['BLACK TEACHERS'] = teacher_dataset['BLACK MALES'] + teacher_dat
 teacher_dataset['HISPANIC TEACHERS'] = teacher_dataset['HISPANIC MALES'] + teacher_dataset["HISPANIC FEMALES"] + teacher_dataset["HISPANIC GENDER NOT REPORTED"]
 teacher_drop_cols = ['WHITE MALES','WHITE FEMALES','WHITE GENDER NOT REPORTED','BLACK MALES', 'BLACK FEMALES', 'BLACK GENDER NOT REPORTED','HISPANIC MALES', 'HISPANIC FEMALES', 'HISPANIC GENDER NOT REPORTED',]
 teacher_dataset.drop(columns = teacher_drop_cols, inplace=True)
-#%%
+
 # Dropping rows with special school districts and dropping rows that contained notes while in Excel format
 teacher_drop_schools = ['ANDERSON ALTERNATIVE', 'SC PUBLIC CHARTER SCHOOL DISTRICT', 'CHARTER INSTITUTE AT ERSKINE',
                         'LIMESTONE CHARTER ASSOCIATION', 'JOHN DE LA HOWE L12', 'DEAF & BLIND SCHOOL', 'JUVENILE JUSTICE', 
