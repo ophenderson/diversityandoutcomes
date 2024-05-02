@@ -37,9 +37,19 @@ teacher_dataset['BLACK TEACHERS'] = teacher_dataset['BLACK MALES'] + teacher_dat
 teacher_dataset['HISPANIC TEACHERS'] = teacher_dataset['HISPANIC MALES'] + teacher_dataset["HISPANIC FEMALES"] + teacher_dataset["HISPANIC GENDER NOT REPORTED"]
 teacher_drop_cols = ['WHITE MALES','WHITE FEMALES','WHITE GENDER NOT REPORTED','BLACK MALES', 'BLACK FEMALES', 'BLACK GENDER NOT REPORTED','HISPANIC MALES', 'HISPANIC FEMALES', 'HISPANIC GENDER NOT REPORTED',]
 teacher_dataset.drop(columns = teacher_drop_cols, inplace=True)
-
-
-# Dropping rows with special school districts
-
-
-# Dropping the rows with all the words in it
+#%%
+# Dropping rows with special school districts and dropping rows that contained notes while in Excel format
+teacher_drop_schools = ['ANDERSON ALTERNATIVE', 'SC PUBLIC CHARTER SCHOOL DISTRICT', 'CHARTER INSTITUTE AT ERSKINE',
+                        'LIMESTONE CHARTER ASSOCIATION', 'JOHN DE LA HOWE L12', 'DEAF & BLIND SCHOOL', 'JUVENILE JUSTICE', 
+                        'ANDERSON ALTERNATIVE SCHOOL', 'ANDERSON 1 & 2 CAREER', 'BARNWELL CO AVC', 'BEAUFORT-JASPER CAREER', 
+                        'F E DUBOSE AVC', 'DILLON COUNTY TECHNOLOGY','DORCHESTER CAREER SCHOOL', 'GREENWOOD CO AVC', 'COPE AVC', 
+                        'DANIEL MORGAN VOC', 'R D ANDERSON TECH', 'H B SWOFFORD', 'Charter Institute at Erskine', 'SCH FOR DEAF & BLIND', 
+                        '3410', 'STATE CHARTER','PALMETTO UNIFIED', 'SPARTANBURG 80', 'SPARTANBURG 81','SPARTANBURG 82',
+                        'SC PUBLIC CHARTER DISTRICT','STATE TOTAL', 'SOUTH CAROLINA', 'ANDERSON 80','ANDERSON 81', 'BEAUFORT 80', 'BARNWELL 80',
+                        'CLARENDON 80', 'DILLON 80', 'DORCHESTER 80', 'GREENWOOD 80', 'ORANGEBURG 80', 'ORNAGEBURG 81']
+teacher_bad = teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'].isin(teacher_drop_schools)
+teacher_dataset = teacher_dataset[teacher_bad == False]
+teacher_bad = teacher_dataset[['WHITE TEACHERS', 'BLACK TEACHERS']].isna().all(axis = 'columns')
+teacher_dataset = teacher_dataset[teacher_bad == False]
+teacher_drop_cols = ['SCHOOL YEAR', 'DISTRICT ID']
+teacher_dataset = teacher_dataset.drop(columns = teacher_drop_cols)

@@ -39,5 +39,6 @@ grad_by_dist['Graduation Rate - W'] = grad_by_dist['GNUMERATOR_RACE_W']/grad_by_
 grad_by_dist['Graduation Rate - B'] = grad_by_dist['GNUMERATOR_RACE_B']/grad_by_dist['GDENOM_RACE_B']
 grad_by_dist['Graduation Rate - H'] = grad_by_dist['GNUMERATOR_RACE_H']/grad_by_dist['GDENOM_RACE_H']
 
-
-
+# Dropping rows with special school districts
+grad_drop_schools = ['SC Department of Corrections', 'SC Department of Juvenile Justice', 'SC Public Charter District', 'SC School for the Deaf and the Blind', 'Charter Institute at Erskine','Department of Juvenile Justice', "Governor's Schools","Governor's School for Agriculture at John de la Howe", 'Limestone Charter Association', 'SC Department Of Juvenile Justice' ]
+grad_by_dist = grad_by_dist.query('DISTRICT != @grad_drop_schools')
