@@ -66,5 +66,5 @@ grad_by_dist = grad_by_dist.rename(index = {'Barnwell 19':'Barnwell 48', 'Barnwe
 grad_by_dist = grad_by_dist.rename(index = {'Orangeburg 3': 'Orangeburg', 'Orangeburg 4': 'Orangeburg', 'Orangeburg 5':'Orangeburg'})
 # For Grad Only - need to change Lexington/Richland 5 to Lexington 5
 grad_by_dist = grad_by_dist.rename(index = {'Lexington/Richland  5':'Lexington 5'})
-# Idk
+# Summing up the combined rows
 grad_by_dist = grad_by_dist.groupby(['Year', 'DISTRICT']).sum()
