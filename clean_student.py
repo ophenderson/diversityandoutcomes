@@ -58,8 +58,11 @@ student_dataset['District'] = student_dataset['District'].replace({'Bamberg 01' 
 student_dataset['District'] = student_dataset['District'].replace({'Barnwell 19':'Barnwell 48', 'Barnwell 29':'Barnwell 48'})
 # Orangeburg 3, 4, 5 became Orangeburg in 2019
 student_dataset['District'] = student_dataset['District'].replace({'Orangeburg 03': 'Orangeburg', 'Orangeburg 04': 'Orangeburg', 'Orangeburg 05':'Orangeburg'})
-# Idk
+# Summing up the combined rows
 student_dataset = student_dataset.groupby(['Year', 'District']).sum()
+# Resetting index and dropping District ID column
+student_dataset.reset_index(inplace=True)
+student_dataset.drop(columns = ['District ID'], inplace=True)
 
 
 

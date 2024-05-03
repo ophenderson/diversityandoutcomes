@@ -78,10 +78,10 @@ teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'] = teacher_dataset['SCHOOL DIST
 teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'] = teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'].replace({'ORANGEBURG 3': 'ORANGEBURG', 'ORANGEBURG 4': 'ORANGEBURG', 'ORANGEBURG 5':'ORANGEBURG'})
 # Adding back Marion 10
 teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'] = teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'].replace({'3410': 'MARION 10'})
-# Idk
+# Summing up the combined rows
 teacher_dataset = teacher_dataset.groupby(['Year', 'SCHOOL DISTRICT/ CAREER CENTER']).sum()
-
-
+# Restting index
+teacher_dataset.reset_index(inplace=True)
 
 
 
