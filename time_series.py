@@ -13,3 +13,12 @@
 # Could be cool to use random generator to pick a county
 
 # Time series graph showing state student teacher parity over time on one line and state graduation rates on the other (x-axis is school year, y-axis in parity, dots represent parity scores and graduation rates)
+
+
+
+# Generating a random county
+import pandas as pd
+import random
+
+
+

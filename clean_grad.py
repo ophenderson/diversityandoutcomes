@@ -1,6 +1,4 @@
-# Couldn't figure out how to make this flexible for all my grad files so just decided to clean one and make sure it all works and then I can apply to rest of my files later
-
-# Importing 
+# Importing pandas, glob, and os
 import pandas as pd
 import glob
 import os
@@ -17,24 +15,35 @@ def read_grad_file(fname):
     info = len(raw)
     print('Number of entries:' ,fname, info)
     return raw
-# need to go through and make these grad specific
+# Empty dictionary that will contain each of the years that are in the dataframe
 grad_data_list = {}
 
+# For loop
 for fname in grad_files:
+    # grabbing the file
     grad = read_grad_file(fname)
+    # getting the school year off the end of the file and creating a column of school years
     (basename, ext) = os.path.splitext(fname)
     tail = basename[-2:]
     grad_data_list[tail]=grad
+    # concatenating all 6 files into 1 dataframe
     grad_dataset = pd.concat(grad_data_list)
 grad_dataset = grad_dataset.reset_index(0)
+# renaming the year column
 grad_dataset = grad_dataset.rename(columns={'level_0':'Year'})
+# Dropping unneeded columns
 grad_keep_cols = ['Year', 'DISTRICT', 'SCHOOL', 'GNUMERATOR_RACE_W', 'GDENOM_RACE_W', 'GNUMERATOR_RACE_B', 'GDENOM_RACE_B', 'GNUMERATOR_RACE_H', 'GDENOM_RACE_H']
 grad_dataset = grad_dataset[grad_keep_cols]
+# Filling in missing values
 grad_dataset.fillna('NaN')
+# replacing all the -1 with 0
 grad_dataset = grad_dataset.replace(-1, 0)
+# Dropping district with and without charter rows because they are sums of all the charter and non-charter schools
 grad_dataset = grad_dataset.query("SCHOOL != 'DISTRICT NO CHARTER' & SCHOOL != 'DISTRICT WITH CHARTER'")
 grad_dataset = grad_dataset.drop('SCHOOL', axis=1)
+# grouping by year and district since the data was originally separated by school
 grad_by_dist = grad_dataset.groupby(['Year', 'DISTRICT']).sum()
+# calculating graduation rates by race
 grad_by_dist['Graduation Rate - W'] = grad_by_dist['GNUMERATOR_RACE_W']/grad_by_dist['GDENOM_RACE_W']
 grad_by_dist['Graduation Rate - B'] = grad_by_dist['GNUMERATOR_RACE_B']/grad_by_dist['GDENOM_RACE_B']
 grad_by_dist['Graduation Rate - H'] = grad_by_dist['GNUMERATOR_RACE_H']/grad_by_dist['GDENOM_RACE_H']
@@ -42,3 +51,13 @@ grad_by_dist['Graduation Rate - H'] = grad_by_dist['GNUMERATOR_RACE_H']/grad_by_
 # Dropping rows with special school districts
 grad_drop_schools = ['SC Department of Corrections', 'SC Department of Juvenile Justice', 'SC Public Charter District', 'SC School for the Deaf and the Blind', 'Charter Institute at Erskine','Department of Juvenile Justice', "Governor's Schools","Governor's School for Agriculture at John de la Howe", 'Limestone Charter Association', 'SC Department Of Juvenile Justice' ]
 grad_by_dist = grad_by_dist.query('DISTRICT != @grad_drop_schools')
+
+# Combining districts that were consolidated prior to 2023 (this will be in all my scripts)
+# Bamberg 1 and 2 became Bamberg 3 in 2022
+
+# Barnwell 19 and 29 became Barnwell 48 in 2022
+# Orangeburg 3, 4, 5 became Orangeburg in 2019
+# For Grad Only - need to change Lexington/Richland 5 to Lexington 5
+
+
+

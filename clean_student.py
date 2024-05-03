@@ -3,6 +3,7 @@ import pandas as pd
 import glob
 import os
 
+
 # Creating a list of all student files
 # I changed the name of the 2017-2018 student district data to make this easier!!
 student_files = glob.glob('raw/*District Headcount by Gender, Ethnicity and Pupils in Poverty*')
@@ -18,7 +19,7 @@ def read_student_file(fname):
     info = len(raw)
     print('Number of entries:' ,fname, info)
     return raw
-
+# Empty dictionary that will contain each of the years that are in the dataframe
 student_data_list = {}
 
 for fname in student_files:
@@ -40,13 +41,11 @@ student_bad = student_dataset['District ID'].isin(student_drop_schools)
 student_dataset = student_dataset[student_bad == False]
 student_bad = student_dataset[['District', 'Total Number of Students']].isna().all(axis = 'columns')
 student_dataset = student_dataset[student_bad == False]
-#%%
+
 # Combining districts that were consolidated prior to 2023 (this will be in all my scripts)
 # Bamberg 1 and 2 became Bamberg 3 in 2022
 # Barnwell 19 and 29 became Barnwell 48 in 2022
 # Orangeburg 3, 4, 5 became Orangeburg in 2019
-
-
 
 
 

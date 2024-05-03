@@ -2,6 +2,7 @@
 import pandas as pd
 import glob
 import os
+import random
 
 # Making a list of teacher files
 # Changed the names of the files to match each other
@@ -53,3 +54,17 @@ teacher_bad = teacher_dataset[['WHITE TEACHERS', 'BLACK TEACHERS']].isna().all(a
 teacher_dataset = teacher_dataset[teacher_bad == False]
 teacher_drop_cols = ['SCHOOL YEAR', 'DISTRICT ID']
 teacher_dataset = teacher_dataset.drop(columns = teacher_drop_cols)
+
+# Combining districts that were consolidated prior to 2023 (this will be in all my scripts)
+# Bamberg 1 and 2 became bamberg 3 in 2022
+# Barnwell 19 and 29 became Barnwell 48 in 2022
+# Orangeburg 3, 4, 5 became Orangeburg in 2019
+
+
+
+
+
+
+
+
+
