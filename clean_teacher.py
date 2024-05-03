@@ -2,7 +2,6 @@
 import pandas as pd
 import glob
 import os
-import random
 
 # Making a list of teacher files
 # Changed the names of the files to match each other
@@ -19,23 +18,28 @@ def read_teacher_file(fname):
     info = len(raw)
     print('Number of entries:' ,fname, info)
     return raw
-
+# Empty dictionary that will contain each of the years that are in the dataframe
 teacher_data_list = {}
-
+# For loop
 for fname in teacher_files:
+    # grabbing the file
     teacher = read_teacher_file(fname)
+    # getting the school year off the end of the file and creating a column of school years
     (basename, ext) = os.path.splitext(fname) 
     tail = basename[-2:]
     teacher_data_list[tail]=teacher
+    # concatenating all 6 files into 1 dataframe
     teacher_dataset = pd.concat(teacher_data_list)
     
 teacher_dataset = teacher_dataset.reset_index(0)
 teacher_dataset = teacher_dataset.rename(columns={'level_0':'Year'})
 teacher_keep_cols = ['Year','SCHOOL YEAR','DISTRICT ID','SCHOOL DISTRICT/ CAREER CENTER','WHITE MALES','WHITE FEMALES','WHITE GENDER NOT REPORTED','BLACK MALES', 'BLACK FEMALES', 'BLACK GENDER NOT REPORTED','HISPANIC MALES', 'HISPANIC FEMALES', 'HISPANIC GENDER NOT REPORTED', 'TOTAL NUMBER OF TEACHERS']
 teacher_dataset = teacher_dataset[teacher_keep_cols]
+# Combining the columns that are separated by gender into 1 column
 teacher_dataset['WHITE TEACHERS'] = teacher_dataset['WHITE MALES'] + teacher_dataset["WHITE FEMALES"] + teacher_dataset["WHITE GENDER NOT REPORTED"]
 teacher_dataset['BLACK TEACHERS'] = teacher_dataset['BLACK MALES'] + teacher_dataset["BLACK FEMALES"] + teacher_dataset["BLACK GENDER NOT REPORTED"]
 teacher_dataset['HISPANIC TEACHERS'] = teacher_dataset['HISPANIC MALES'] + teacher_dataset["HISPANIC FEMALES"] + teacher_dataset["HISPANIC GENDER NOT REPORTED"]
+# Dropping the columns now that they're combined
 teacher_drop_cols = ['WHITE MALES','WHITE FEMALES','WHITE GENDER NOT REPORTED','BLACK MALES', 'BLACK FEMALES', 'BLACK GENDER NOT REPORTED','HISPANIC MALES', 'HISPANIC FEMALES', 'HISPANIC GENDER NOT REPORTED',]
 teacher_dataset.drop(columns = teacher_drop_cols, inplace=True)
 
@@ -50,8 +54,13 @@ teacher_drop_schools = ['ANDERSON ALTERNATIVE', 'SC PUBLIC CHARTER SCHOOL DISTRI
                         'CLARENDON 80', 'DILLON 80', 'DORCHESTER 80', 'GREENWOOD 80', 'ORANGEBURG 80', 'ORANGEBURG 81']
 teacher_bad = teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'].isin(teacher_drop_schools)
 teacher_dataset = teacher_dataset[teacher_bad == False]
+# Excel files contained notes at the bottom and since the script
+# was concatenated they are throughout the dataframe
+# this code goes through the dataframe and drops all the rows that contain "nan" 
+# as a result of having notes in the index columns
 teacher_bad = teacher_dataset[['WHITE TEACHERS', 'BLACK TEACHERS']].isna().all(axis = 'columns')
 teacher_dataset = teacher_dataset[teacher_bad == False]
+# Dropping school year and district ID columns
 teacher_drop_cols = ['SCHOOL YEAR', 'DISTRICT ID']
 teacher_dataset = teacher_dataset.drop(columns = teacher_drop_cols)
 
