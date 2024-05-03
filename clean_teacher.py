@@ -54,7 +54,7 @@ teacher_drop_schools = ['ANDERSON ALTERNATIVE', 'SC PUBLIC CHARTER SCHOOL DISTRI
                         'ANDERSON ALTERNATIVE SCHOOL', 'ANDERSON 1 & 2 CAREER', 'BARNWELL CO AVC', 'BEAUFORT-JASPER CAREER', 
                         'F E DUBOSE AVC', 'DILLON COUNTY TECHNOLOGY','DORCHESTER CAREER SCHOOL', 'GREENWOOD CO AVC', 'COPE AVC', 
                         'DANIEL MORGAN VOC', 'R D ANDERSON TECH', 'H B SWOFFORD', 'Charter Institute at Erskine', 'SCH FOR DEAF & BLIND', 
-                        '3410', 'STATE CHARTER','PALMETTO UNIFIED', 'SPARTANBURG 80', 'SPARTANBURG 81','SPARTANBURG 82',
+                        'STATE CHARTER','PALMETTO UNIFIED', 'SPARTANBURG 80', 'SPARTANBURG 81','SPARTANBURG 82',
                         'SC PUBLIC CHARTER DISTRICT','STATE TOTAL', 'SOUTH CAROLINA', 'ANDERSON 80','ANDERSON 81', 'BEAUFORT 80', 'BARNWELL 80',
                         'CLARENDON 80', 'DILLON 80', 'DORCHESTER 80', 'GREENWOOD 80', 'ORANGEBURG 80', 'ORANGEBURG 81']
 teacher_bad = teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'].isin(teacher_drop_schools)
@@ -70,9 +70,16 @@ teacher_drop_cols = ['SCHOOL YEAR', 'DISTRICT ID']
 teacher_dataset = teacher_dataset.drop(columns = teacher_drop_cols)
 
 # Combining districts that were consolidated prior to 2023 (this will be in all my scripts)
-# Bamberg 1 and 2 became bamberg 3 in 2022
+# Bamberg 1 and 2 became Bamberg 3 in 2022
+teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'] = teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'].replace({'BAMBERG 1':'BAMBERG 3', 'BAMBERG 2':'BAMBERG 3', 'BAMBERG 01':'BAMBERG 3', 'BAMBERG 02':'BAMBERG 3'})
 # Barnwell 19 and 29 became Barnwell 48 in 2022
+teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'] = teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'].replace({'BARNWELL 19':'BARNWELL 48', 'BARNWELL 29':'BARNWELL 48'})
 # Orangeburg 3, 4, 5 became Orangeburg in 2019
+teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'] = teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'].replace({'ORANGEBURG 3': 'ORANGEBURG', 'ORANGEBURG 4': 'ORANGEBURG', 'ORANGEBURG 5':'ORANGEBURG'})
+# Adding back Marion 10
+teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'] = teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'].replace({'3410': 'MARION 10'})
+# Idk
+teacher_dataset = teacher_dataset.groupby(['Year', 'SCHOOL DISTRICT/ CAREER CENTER']).sum()
 
 
 

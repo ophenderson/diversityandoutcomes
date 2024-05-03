@@ -59,12 +59,12 @@ grad_by_dist = grad_by_dist.query('DISTRICT != @grad_drop_schools')
 
 # Combining districts that were consolidated prior to 2023 (this will be in all my scripts)
 # Bamberg 1 and 2 became Bamberg 3 in 2022
-
+grad_by_dist = grad_by_dist.rename(index = {'Bamberg 1':'Bamberg 3', 'Bamberg 2':'Bamberg 3'})
 # Barnwell 19 and 29 became Barnwell 48 in 2022
-
+grad_by_dist = grad_by_dist.rename(index = {'Barnwell 19':'Barnwell 48', 'Barnwell 29':'Barnwell 48'})
 # Orangeburg 3, 4, 5 became Orangeburg in 2019
-
+grad_by_dist = grad_by_dist.rename(index = {'Orangeburg 3': 'Orangeburg', 'Orangeburg 4': 'Orangeburg', 'Orangeburg 5':'Orangeburg'})
 # For Grad Only - need to change Lexington/Richland 5 to Lexington 5
-grad_by_dist['DISTRICT'] = grad_by_dist['DISTRICT'].replace({'Lexington/Richland  5': 'Lexington 5'})
-
-
+grad_by_dist = grad_by_dist.rename(index = {'Lexington/Richland  5':'Lexington 5'})
+# Idk
+grad_by_dist = grad_by_dist.groupby(['Year', 'DISTRICT']).sum()
