@@ -83,9 +83,11 @@ teacher_dataset = teacher_dataset.groupby(['Year', 'SCHOOL DISTRICT/ CAREER CENT
 # Restting index
 teacher_dataset.reset_index(inplace=True)
 
+# District column consistency
+teacher_dataset.rename(columns = {'SCHOOL DISTRICT/ CAREER CENTER':'District'}, inplace=True)
+teacher_dataset['District'] = teacher_dataset['District'].str.replace(r' 0',' ')
 
-
-
-
+# Saving as pickle file
+teacher_dataset.to_pickle('teacher.pkl')
 
 

@@ -64,6 +64,13 @@ student_dataset = student_dataset.groupby(['Year', 'District']).sum()
 student_dataset.reset_index(inplace=True)
 student_dataset.drop(columns = ['District ID'], inplace=True)
 
+# District column consistency
+student_dataset['District'] = student_dataset['District'].str.upper()
+student_dataset['District'] = student_dataset['District'].str.replace(r' 0',' ')
+# student_dataset['District'] = student_dataset['District'].str.replace(r' 1$','')
+
+# Saving as pickle file
+student_dataset.to_pickle('student.pkl')
 
 
 
