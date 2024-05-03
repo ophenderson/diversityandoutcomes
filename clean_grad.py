@@ -28,11 +28,13 @@ for fname in grad_files:
     grad_data_list[tail]=grad
     # concatenating all 6 files into 1 dataframe
     grad_dataset = pd.concat(grad_data_list)
+# Ending the for loop, resetting the index
 grad_dataset = grad_dataset.reset_index(0)
 # renaming the year column
 grad_dataset = grad_dataset.rename(columns={'level_0':'Year'})
 # Dropping unneeded columns
-grad_keep_cols = ['Year', 'DISTRICT', 'SCHOOL', 'GNUMERATOR_RACE_W', 'GDENOM_RACE_W', 'GNUMERATOR_RACE_B', 'GDENOM_RACE_B', 'GNUMERATOR_RACE_H', 'GDENOM_RACE_H']
+grad_keep_cols = ['Year', 'DISTRICT', 'SCHOOL', 'GNUMERATOR_RACE_W', 'GDENOM_RACE_W', 'GNUMERATOR_RACE_B', 
+                  'GDENOM_RACE_B', 'GNUMERATOR_RACE_H', 'GDENOM_RACE_H']
 grad_dataset = grad_dataset[grad_keep_cols]
 # Filling in missing values
 grad_dataset.fillna('NaN')
@@ -49,15 +51,20 @@ grad_by_dist['Graduation Rate - B'] = grad_by_dist['GNUMERATOR_RACE_B']/grad_by_
 grad_by_dist['Graduation Rate - H'] = grad_by_dist['GNUMERATOR_RACE_H']/grad_by_dist['GDENOM_RACE_H']
 
 # Dropping rows with special school districts
-grad_drop_schools = ['SC Department of Corrections', 'SC Department of Juvenile Justice', 'SC Public Charter District', 'SC School for the Deaf and the Blind', 'Charter Institute at Erskine','Department of Juvenile Justice', "Governor's Schools","Governor's School for Agriculture at John de la Howe", 'Limestone Charter Association', 'SC Department Of Juvenile Justice' ]
+grad_drop_schools = ['SC Department of Corrections', 'SC Department of Juvenile Justice', 'SC Public Charter District', 
+                     'SC School for the Deaf and the Blind', 'Charter Institute at Erskine','Department of Juvenile Justice',
+                     "Governor's Schools","Governor's School for Agriculture at John de la Howe", 
+                     'Limestone Charter Association', 'SC Department Of Juvenile Justice', 'Palmetto Unified']
 grad_by_dist = grad_by_dist.query('DISTRICT != @grad_drop_schools')
 
 # Combining districts that were consolidated prior to 2023 (this will be in all my scripts)
 # Bamberg 1 and 2 became Bamberg 3 in 2022
 
 # Barnwell 19 and 29 became Barnwell 48 in 2022
-# Orangeburg 3, 4, 5 became Orangeburg in 2019
-# For Grad Only - need to change Lexington/Richland 5 to Lexington 5
 
+# Orangeburg 3, 4, 5 became Orangeburg in 2019
+
+# For Grad Only - need to change Lexington/Richland 5 to Lexington 5
+grad_by_dist['DISTRICT'] = grad_by_dist['DISTRICT'].replace({'Lexington/Richland  5': 'Lexington 5'})
 
 

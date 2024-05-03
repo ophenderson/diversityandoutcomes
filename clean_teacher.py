@@ -30,17 +30,22 @@ for fname in teacher_files:
     teacher_data_list[tail]=teacher
     # concatenating all 6 files into 1 dataframe
     teacher_dataset = pd.concat(teacher_data_list)
-    
+# Ending the for loop, resetting the index
 teacher_dataset = teacher_dataset.reset_index(0)
+# Renaming the year column
 teacher_dataset = teacher_dataset.rename(columns={'level_0':'Year'})
-teacher_keep_cols = ['Year','SCHOOL YEAR','DISTRICT ID','SCHOOL DISTRICT/ CAREER CENTER','WHITE MALES','WHITE FEMALES','WHITE GENDER NOT REPORTED','BLACK MALES', 'BLACK FEMALES', 'BLACK GENDER NOT REPORTED','HISPANIC MALES', 'HISPANIC FEMALES', 'HISPANIC GENDER NOT REPORTED', 'TOTAL NUMBER OF TEACHERS']
+# Dropping unneeded columns
+teacher_keep_cols = ['Year','SCHOOL YEAR','DISTRICT ID','SCHOOL DISTRICT/ CAREER CENTER','WHITE MALES','WHITE FEMALES',
+                     'WHITE GENDER NOT REPORTED','BLACK MALES', 'BLACK FEMALES', 'BLACK GENDER NOT REPORTED','HISPANIC MALES',
+                     'HISPANIC FEMALES', 'HISPANIC GENDER NOT REPORTED', 'TOTAL NUMBER OF TEACHERS']
 teacher_dataset = teacher_dataset[teacher_keep_cols]
 # Combining the columns that are separated by gender into 1 column
 teacher_dataset['WHITE TEACHERS'] = teacher_dataset['WHITE MALES'] + teacher_dataset["WHITE FEMALES"] + teacher_dataset["WHITE GENDER NOT REPORTED"]
 teacher_dataset['BLACK TEACHERS'] = teacher_dataset['BLACK MALES'] + teacher_dataset["BLACK FEMALES"] + teacher_dataset["BLACK GENDER NOT REPORTED"]
 teacher_dataset['HISPANIC TEACHERS'] = teacher_dataset['HISPANIC MALES'] + teacher_dataset["HISPANIC FEMALES"] + teacher_dataset["HISPANIC GENDER NOT REPORTED"]
 # Dropping the columns now that they're combined
-teacher_drop_cols = ['WHITE MALES','WHITE FEMALES','WHITE GENDER NOT REPORTED','BLACK MALES', 'BLACK FEMALES', 'BLACK GENDER NOT REPORTED','HISPANIC MALES', 'HISPANIC FEMALES', 'HISPANIC GENDER NOT REPORTED',]
+teacher_drop_cols = ['WHITE MALES','WHITE FEMALES','WHITE GENDER NOT REPORTED','BLACK MALES', 'BLACK FEMALES', 
+                     'BLACK GENDER NOT REPORTED','HISPANIC MALES', 'HISPANIC FEMALES', 'HISPANIC GENDER NOT REPORTED',]
 teacher_dataset.drop(columns = teacher_drop_cols, inplace=True)
 
 # Dropping rows with special school districts and dropping rows that contained notes while in Excel format

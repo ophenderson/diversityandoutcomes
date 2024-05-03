@@ -22,21 +22,30 @@ def read_student_file(fname):
 # Empty dictionary that will contain each of the years that are in the dataframe
 student_data_list = {}
 
+# For loop
 for fname in student_files:
+    # grabbing the file
     student = read_student_file(fname)
+    # getting the school year off the end of the file and creating a column of school years
     (basename, ext) = os.path.splitext(fname)
     tail = basename[-2:]
     student_data_list[tail]=student
+    # concatenating all 6 files into 1 dataframe
     student_dataset = pd.concat(student_data_list)
-    
+# Ending the for loop, resetting the index
 student_dataset = student_dataset.reset_index(0)
-student_dataset = student_dataset.rename(columns={'level_0':'Year', 'Unnamed: 0':'District ID','Unnamed: 1':'District','Unnamed: 2':'Total Number of Students','Yes':'Pupils in Poverty'})
-student_keep_cols = ['Year', 'District ID', 'District', 'Total Number of Students','Black or African-American','Hispanic or Latino', 'White']
+# Renaming columns - I had to do this because in one of the excel files the names didn't match the others. This line of code aligns that file back with the consistent names. 
+student_dataset = student_dataset.rename(columns={'level_0':'Year', 'Unnamed: 0':'District ID','Unnamed: 1':'District',
+                                                  'Unnamed: 2':'Total Number of Students','Yes':'Pupils in Poverty'})
+# Dropping unneeded columns
+student_keep_cols = ['Year', 'District ID', 'District', 'Total Number of Students','Black or African-American',
+                     'Hispanic or Latino', 'White']
 student_dataset = student_dataset[student_keep_cols]
 
 
 # Dropping rows with special school districts
-student_drop_schools = ['4701','4801','5205','5207','5208','5209','5364','5395','4901','Statewide Totals', 'Statewide Total', 'Statewide Percentage', 'Statewide Percentages', '']
+student_drop_schools = ['4701','4801','5205','5207','5208','5209','5364','5395','4901','Statewide Totals', 
+                        'Statewide Total', 'Statewide Percentage', 'Statewide Percentages', '']
 student_bad = student_dataset['District ID'].isin(student_drop_schools)
 student_dataset = student_dataset[student_bad == False]
 student_bad = student_dataset[['District', 'Total Number of Students']].isna().all(axis = 'columns')
