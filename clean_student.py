@@ -35,13 +35,16 @@ student_dataset = student_dataset[student_keep_cols]
 
 
 # Dropping rows with special school districts
-student_drop_schools = ['4701','4801','5205','5207','5208','5209','5364','5395','4901','Statewide Totals', 'Statewide Total', 'Statewide Percentage', 'Statewide Percentages']
+student_drop_schools = ['4701','4801','5205','5207','5208','5209','5364','5395','4901','Statewide Totals', 'Statewide Total', 'Statewide Percentage', 'Statewide Percentages', '']
 student_bad = student_dataset['District ID'].isin(student_drop_schools)
 student_dataset = student_dataset[student_bad == False]
 student_bad = student_dataset[['District', 'Total Number of Students']].isna().all(axis = 'columns')
 student_dataset = student_dataset[student_bad == False]
-
-
+#%%
+# Combining districts that were consolidated prior to 2023 (this will be in all my scripts)
+# Bamberg 1 and 2 became Bamberg 3 in 2022
+# Barnwell 19 and 29 became Barnwell 48 in 2022
+# Orangeburg 3, 4, 5 became Orangeburg in 2019
 
 
 

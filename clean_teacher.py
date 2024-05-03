@@ -46,7 +46,7 @@ teacher_drop_schools = ['ANDERSON ALTERNATIVE', 'SC PUBLIC CHARTER SCHOOL DISTRI
                         'DANIEL MORGAN VOC', 'R D ANDERSON TECH', 'H B SWOFFORD', 'Charter Institute at Erskine', 'SCH FOR DEAF & BLIND', 
                         '3410', 'STATE CHARTER','PALMETTO UNIFIED', 'SPARTANBURG 80', 'SPARTANBURG 81','SPARTANBURG 82',
                         'SC PUBLIC CHARTER DISTRICT','STATE TOTAL', 'SOUTH CAROLINA', 'ANDERSON 80','ANDERSON 81', 'BEAUFORT 80', 'BARNWELL 80',
-                        'CLARENDON 80', 'DILLON 80', 'DORCHESTER 80', 'GREENWOOD 80', 'ORANGEBURG 80', 'ORNAGEBURG 81']
+                        'CLARENDON 80', 'DILLON 80', 'DORCHESTER 80', 'GREENWOOD 80', 'ORANGEBURG 80', 'ORANGEBURG 81']
 teacher_bad = teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'].isin(teacher_drop_schools)
 teacher_dataset = teacher_dataset[teacher_bad == False]
 teacher_bad = teacher_dataset[['WHITE TEACHERS', 'BLACK TEACHERS']].isna().all(axis = 'columns')
