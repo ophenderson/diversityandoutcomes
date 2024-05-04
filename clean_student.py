@@ -58,6 +58,8 @@ student_dataset['District'] = student_dataset['District'].replace({'Bamberg 01' 
 student_dataset['District'] = student_dataset['District'].replace({'Barnwell 19':'Barnwell 48', 'Barnwell 29':'Barnwell 48'})
 # Orangeburg 3, 4, 5 became Orangeburg in 2019
 student_dataset['District'] = student_dataset['District'].replace({'Orangeburg 03': 'Orangeburg', 'Orangeburg 04': 'Orangeburg', 'Orangeburg 05':'Orangeburg'})
+# Hampton 1 and 2 became Hampton 3 in 2022
+student_dataset['District'] = student_dataset['District'].replace({'Hampton 01':'Hampton 3', 'Hampton 02':'Hampton 3'})
 # Summing up the combined rows
 student_dataset = student_dataset.groupby(['Year', 'District']).sum()
 # Resetting index and dropping District ID column
@@ -67,6 +69,24 @@ student_dataset.drop(columns = ['District ID'], inplace=True)
 # District column consistency
 student_dataset['District'] = student_dataset['District'].str.upper()
 student_dataset['District'] = student_dataset['District'].str.replace(r' 0',' ')
+student_dataset['District'] = student_dataset['District'].replace({'ABBEVILLE 60':'ABBEVILLE', 'AIKEN 1':'AIKEN', 
+                                                                   'ALLENDALE 1':'ALLENDALE', 'BEAUFORT 1': 'BEAUFORT', 
+                                                                   'BERKELEY 1':'BERKELEY', 'CALHOUN 1':'CALHOUN', 
+                                                                   'CHARLESTON 1':'CHARLESTON', 'CHEROKEE 1':'CHEROKEE', 
+                                                                   'CHESTER 1':'CHESTER', 'CHESTERFIELD 1':'CHESTERFIELD', 
+                                                                   'COLLETON 1':'COLLETON', 'DARLINGTON 1':'DARLINGTON',
+                                                                   'EDGEFIELD 1':'EDGEFIELD', 'FAIRFIELD 1':'FAIRFIELD', 
+                                                                   'GEORGETOWN 1':'GEORGETOWN', 'GREENVILLE 1':'GREENVILLE', 
+                                                                   'HORRY 1':'HORRY', 'JASPER 1':'JASPER','KERSHAW 1':'KERSHAW', 
+                                                                   'LANCASTER 1':'LANCASTER', 'LEE 1':'LEE', 'MARLBORO 1':'MARLBORO', 
+                                                                   'MCCORMICK 1':'MCCORMICK', 'NEWBERRY 1':'NEWBERRY', 
+                                                                   'OCONEE 1':'OCONEE', 'PICKENS 1':'PICKENS', 'SALUDA 1':'SALUDA', 
+                                                                   'SUMTER 1':'SUMTER', 'UNION 1':'UNION', 
+                                                                   'WILLIAMSBURG 1':'WILLIAMSBURG','HAMPTON':'HAMPTON 3'})
+
+
+
+
 # student_dataset['District'] = student_dataset['District'].str.replace(r' 1$','')
 
 # Saving as pickle file

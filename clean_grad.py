@@ -64,8 +64,8 @@ grad_by_dist = grad_by_dist.rename(index = {'Bamberg 1':'Bamberg 3', 'Bamberg 2'
 grad_by_dist = grad_by_dist.rename(index = {'Barnwell 19':'Barnwell 48', 'Barnwell 29':'Barnwell 48'})
 # Orangeburg 3, 4, 5 became Orangeburg in 2019
 grad_by_dist = grad_by_dist.rename(index = {'Orangeburg 3': 'Orangeburg', 'Orangeburg 4': 'Orangeburg', 'Orangeburg 5':'Orangeburg'})
-# For Grad Only - need to change Lexington/Richland 5 to Lexington 5
-grad_by_dist = grad_by_dist.rename(index = {'Lexington/Richland  5':'Lexington 5', 'LEXINGTON/ RICHLAND  5': 'Lexington 5'})
+# Hampton 1 and 2 became Hampton 3 in 2022
+grad_by_dist = grad_by_dist.rename(index = {'Hampton 1':'Hampton 3', 'Hampton 2':'Hampton 3'})
 # Summing up the combined rows
 grad_by_dist = grad_by_dist.groupby(['Year', 'DISTRICT']).sum()
 # Resetting index
@@ -74,6 +74,9 @@ grad_by_dist.reset_index(inplace=True)
 # District column consistency 
 grad_by_dist.rename(columns = {'DISTRICT':'District'}, inplace=True)
 grad_by_dist['District'] = grad_by_dist['District'].str.upper()
+grad_by_dist['District'] = grad_by_dist['District'].replace({'YORK 1 (YORK)':'YORK 1', 'YORK 2 (CLOVER)':'YORK 2', 
+                                                             'YORK 3 (ROCK HILL)':'YORK 3', 'YORK 4 (FORT MILL)':'YORK 4',
+                                                             'LEXINGTON/ RICHLAND  5':'LEXINGTON 5', 'LEXINGTON/RICHLAND  5':'LEXINGTON 5'}) 
 
 # Saving as pickle file
 grad_by_dist.to_pickle('grad.pkl')

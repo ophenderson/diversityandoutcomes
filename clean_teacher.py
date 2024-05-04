@@ -78,6 +78,9 @@ teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'] = teacher_dataset['SCHOOL DIST
 teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'] = teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'].replace({'ORANGEBURG 3': 'ORANGEBURG', 'ORANGEBURG 4': 'ORANGEBURG', 'ORANGEBURG 5':'ORANGEBURG'})
 # Adding back Marion 10
 teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'] = teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'].replace({'3410': 'MARION 10'})
+# Hampton 1 and 2 became Hampton 3 in 2022
+teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'] = teacher_dataset['SCHOOL DISTRICT/ CAREER CENTER'].replace({'HAMPTON 1':'HAMPTON 3', 'HAMPTON 2':'HAMPTON 3', 'HAMPTON 01':'HAMPTON 3', 'HAMPTON 02':'HAMPTON 3'})
+
 # Summing up the combined rows
 teacher_dataset = teacher_dataset.groupby(['Year', 'SCHOOL DISTRICT/ CAREER CENTER']).sum()
 # Restting index
@@ -86,6 +89,24 @@ teacher_dataset.reset_index(inplace=True)
 # District column consistency
 teacher_dataset.rename(columns = {'SCHOOL DISTRICT/ CAREER CENTER':'District'}, inplace=True)
 teacher_dataset['District'] = teacher_dataset['District'].str.replace(r' 0',' ')
+teacher_dataset['District'] = teacher_dataset['District'].replace({'ABBEVILLE 60':'ABBEVILLE', 'AIKEN 1':'AIKEN', 
+                                                                   'ALLENDALE 1':'ALLENDALE', 'BEAUFORT 1': 'BEAUFORT', 
+                                                                   'BERKELEY 1':'BERKELEY', 'CALHOUN 1':'CALHOUN', 
+                                                                   'CHARLESTON 1':'CHARLESTON', 'CHEROKEE 1':'CHEROKEE', 
+                                                                   'CHESTER 1':'CHESTER', 'CHESTERFIELD 1':'CHESTERFIELD', 
+                                                                   'COLLETON 1':'COLLETON', 'DARLINGTON 1':'DARLINGTON',
+                                                                   'EDGEFIELD 1':'EDGEFIELD', 'FAIRFIELD 1':'FAIRFIELD', 
+                                                                   'GEORGETOWN 1':'GEORGETOWN', 'GREENVILLE 1':'GREENVILLE', 
+                                                                   'HORRY 1':'HORRY', 'JASPER 1':'JASPER','KERSHAW 1':'KERSHAW', 
+                                                                   'LANCASTER 1':'LANCASTER', 'LEE 1':'LEE', 
+                                                                   'LEXINGTON/  RICHLAND  5':'LEXINGTON 5', 'MARLBORO 1':'MARLBORO', 
+                                                                   'MCCORMICK 1':'MCCORMICK', 'NEWBERRY 1':'NEWBERRY', 
+                                                                   'OCONEE 1':'OCONEE', 'PICKENS 1':'PICKENS', 'SALUDA 1':'SALUDA', 
+                                                                   'SUMTER 1':'SUMTER', 'UNION 1':'UNION', 
+                                                                   'WILLIAMSBURG 1':'WILLIAMSBURG', 'YORK 1 (YORK)':'YORK 1', 
+                                                                   'YORK 2 (CLOVER)':'YORK 2', 'YORK 3 (ROCK HILL)':'YORK 3', 
+                                                                   'YORK 4 (FORT MILL)':'YORK 4', 'SUMTER COUNTY':'SUMTER', 
+                                                                   'HAMPTON':'HAMPTON 3'}) 
 
 # Saving as pickle file
 teacher_dataset.to_pickle('teacher.pkl')

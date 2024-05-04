@@ -10,8 +10,11 @@ students = pd.read_pickle('student.pkl')
 
 
 
-# Attempting the join on my own...
-merged = teachers.merge(grads, on='District', how = 'outer', indicator=True)
-# look at merge indicator
-# drop merge indicator
-# merged = merged.students()
+# Merging teacher and grad dataset by the Year and District columns
+merged = teachers.merge(grads, on=['Year', 'District'], how = 'outer', indicator=True)
+# Looking at the merge indicator to make sure everything says 'Both'
+print(merged['_merge'])
+# Merge indicator looks good... drop the merge indicator before my next merge 
+merged.drop(columns = ['_merge'], inplace=True)
+# Merging student data
+merged = merged.merge(students, on=['Year', 'District'], how = 'outer', indicator=True)
