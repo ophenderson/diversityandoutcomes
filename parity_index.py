@@ -8,9 +8,11 @@
 import pandas as pd 
 
 # Reading pickle
-grads = pd.read_pickle('grad.pkl')
-teachers = pd.read_pickle('teacher.pkl')
-students = pd.read_pickle('student.pkl')
 merged_df = pd.read_pickle('merged.pkl')
+
+# Calculating parity scores
+merged_df['S-T Parity (W)'] = (merged_df['White']/merged_df['Total Number of Students'])/(merged_df['WHITE TEACHERS']/merged_df['TOTAL NUMBER OF TEACHERS'])
+merged_df['S-T Parity (B)'] = (merged_df['Black or African-American']/merged_df['Total Number of Students'])/(merged_df['BLACK TEACHERS']/merged_df['TOTAL NUMBER OF TEACHERS'])
+merged_df['S-T Parity (H)'] = (merged_df['Hispanic or Latino']/merged_df['Total Number of Students'])/(merged_df['HISPANIC TEACHERS']/merged_df['TOTAL NUMBER OF TEACHERS'])
 
 
