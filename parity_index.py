@@ -15,4 +15,4 @@ merged_df['S-T Parity (W)'] = (merged_df['White']/merged_df['Total Number of Stu
 merged_df['S-T Parity (B)'] = (merged_df['Black or African-American']/merged_df['Total Number of Students'])/(merged_df['BLACK TEACHERS']/merged_df['TOTAL NUMBER OF TEACHERS'])
 merged_df['S-T Parity (H)'] = (merged_df['Hispanic or Latino']/merged_df['Total Number of Students'])/(merged_df['HISPANIC TEACHERS']/merged_df['TOTAL NUMBER OF TEACHERS'])
 
-
+merged_df.to_pickle('final.pkl')
