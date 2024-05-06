@@ -73,12 +73,15 @@ plt.xlabel('Parity Score')
 plt.ylabel('County')
 plt.title('Districts with the Highest Parity Scores - W')
 plt.tight_layout()
+plt.legend().remove()
+
 ## Black
 highest_parity_b = final_parity_b.head(10)
 highest_parity_b.set_index('District').plot(kind='barh', y = 'T-S Parity (B)')
 plt.ylabel('Parity Score')
 plt.title('Districts with the Highest Parity Scores - B')
 plt.tight_layout()
+plt.legend().remove()
 
 ## Hispanic
 highest_parity_h = final_parity_h.head(10)
@@ -86,6 +89,7 @@ highest_parity_h.set_index('District').plot(kind='barh', y = 'T-S Parity (H)')
 plt.ylabel('Parity Score')
 plt.title('Districts with the Highest Parity Scores - H')
 plt.tight_layout()
+plt.legend().remove()
 
 # Lowest Parity
 
@@ -95,6 +99,7 @@ lowest_parity_w.set_index('District').plot(kind='barh', y = 'T-S Parity (W)')
 plt.ylabel('Parity Score')
 plt.title('Districts with the Lowest Parity Scores - W')
 plt.tight_layout()
+plt.legend().remove()
 
 ## Black
 lowest_parity_b = final_parity_b.tail(10)
@@ -102,6 +107,7 @@ lowest_parity_b.set_index('District').plot(kind='barh', y = 'T-S Parity (B)')
 plt.ylabel('Parity Score')
 plt.title('Districts with the Lowest Parity Scores - B')
 plt.tight_layout()
+plt.legend().remove()
 
 ## Hispanic
 lowest_parity_h = final_parity_h.tail(10)
@@ -109,8 +115,8 @@ highest_parity_w.set_index('District').plot(kind='barh', y = 'T-S Parity (H)')
 plt.ylabel('Parity Score')
 plt.title('Districts with the Lowest Parity Scores - H')
 plt.tight_layout()
+plt.legend().remove()
 
-#%%
 # Sixth and Seventh Graphs - Counties with the highest and lowest graduation rates in 2023
 # sorting in descending order
 final_grad_w = final_2023.sort_values(by='Graduation Rate - W', ascending = False)
@@ -125,6 +131,7 @@ lowest_grad_w.set_index('District').plot(kind='barh', y = 'Graduation Rate - W')
 plt.ylabel('Graduation Rate')
 plt.title('Districts with the Lowest Graduation Rates - W')
 plt.tight_layout()
+plt.legend().remove()
 
 ## Black
 lowest_grad_b = final_grad_b.tail(10)
@@ -132,13 +139,15 @@ lowest_grad_b.set_index('District').plot(kind='barh', y = 'Graduation Rate - B')
 plt.ylabel('Graduation Rate')
 plt.title('Districts with the Lowest Graduation Rates - B')
 plt.tight_layout()
+plt.legend().remove()
 
-## Hispanic
+## Hispanic - Graph is empty because all values are missing
 lowest_grad_h = final_grad_h.tail(10)
 lowest_grad_h.set_index('District').plot(kind='barh', y = 'Graduation Rate - H')
 plt.ylabel('Graduation Rate')
 plt.title('Districts with the Lowest Graduation Rates - H')
 plt.tight_layout()
+plt.legend().remove()
 
 # Visuals - Highest
 ## White
@@ -147,6 +156,7 @@ highest_grad_w.set_index('District').plot(kind='barh', y = 'Graduation Rate - W'
 plt.ylabel('Graduation Rate')
 plt.title('Districts with the Highest Graduation Rates - W')
 plt.tight_layout()
+plt.legend().remove()
 
 ## Black
 highest_grad_b = final_grad_b.head(10)
@@ -154,6 +164,7 @@ highest_grad_b.set_index('District').plot(kind='barh', y = 'Graduation Rate - B'
 plt.ylabel('Graduation Rate')
 plt.title('Districts with the Highest Graduation Rates - B')
 plt.tight_layout()
+plt.legend().remove()
 
 ## Hispanic
 highest_grad_h = final_grad_h.head(10)
@@ -161,6 +172,7 @@ highest_grad_h.set_index('District').plot(kind='barh', y = 'Graduation Rate - H'
 plt.ylabel('Graduation Rate')
 plt.title('Districts with the Highest Graduation Rates - H')
 plt.tight_layout()
+plt.legend().remove()
 
 
 
