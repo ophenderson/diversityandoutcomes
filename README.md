@@ -24,47 +24,85 @@ The data includes:
 3. [Teacher Counts by Race and Gender](https://ed.sc.gov/data/other/teacher-data/)
 - Teacher counts are pulled from the South Carolina Department of Education and are distributed by race and gender. In order to complete this analysis, you will need teacher diversity data from your state of choice's Department of Education website. 
 
-Note: All data should be available by district. (bold this)
+Note: **Make sure your data is separated by district.**
 
-## Scripts
+## Scripts and Folders
 
 In this repository, you'll find 7 scripts, 3 dedicated to cleaning student, teacher, and graduation rate data, 1 dedicated to joining that cleaned data together, 1 dedicated to calculating parity ratios, and 2 dedicated to creating visualizations. 
 
-### Data Cleaning Scripts
-1. `clean_grad.py` 
-    - This script will perform a number of cleaning functions on your graduation rate data. In order for it to best serve your analysis:
-        - Look at it first
+Input data and outputs for this repository are all organized into labeled folders. Before you start running scripts, you should gather all of your necessary input data and organize it into a folder called 'raw'.
+
+Scripts should be run in the order that they appear below. 
+
+### Data Cleaning Scripts 
+1. `Cleaning Scripts/clean_grad.py` 
+    - This script will pull graduation rate files from your 'raw' folder, perform a number of cleaning functions on your the data, and save your final cleaned dataframe as a pickle file. In order for this script to best serve your analysis:
+        - Look it over 
+        - Edit the existing steps to reflect your data
         - Remove any steps that don't serve you
         - Add cleaning steps you think are necessary 
-        - Edit the existing steps to reflect your data
-    - The "District Column Consistency" code is especially important, as it is a special place set aside for you to make sure that the column that you wish to perform any join functions on is consistent across all of your data. 
+        
+    - The "District Column Consistency" code is especially important, as it will allow you to make sure that the column you wish to perform any join functions on is consistent across all of your data.
 
-2. `clean_student.py`
-    - This script will perform a number of cleaning functions on your student headcount data. In order for it to best serve your analysis:
-        - Look at it first
+2. `Cleaning Scripts/clean_student.py`
+    - This script will pull student headcount files from your 'raw' folder, perform a number of cleaning functions on your the data, and save your final cleaned dataframe as a pickle file. In order for this script to best serve your analysis:
+        - Look it over 
+        - Edit the existing steps to reflect your data
         - Remove any steps that don't serve you
         - Add cleaning steps you think are necessary 
+        
+    - The "District Column Consistency" code is especially important, as it will allow you to make sure that the column you wish to perform any join functions on is consistent across all of your data.
+
+3. `Cleaning Scripts/clean_teacher.py`
+    This script will pull teacher diversity files from your 'raw' folder, perform a number of cleaning functions on your the data, and save your final cleaned dataframe as a pickle file. In order for this script to best serve your analysis:
+        - Look it over 
         - Edit the existing steps to reflect your data
-    - The "District Column Consistency" code is especially important, as it is a special place set aside for you to make sure that the column that you wish to perform any join functions on is consistent across all of your data. 
-3. `clean_teacher.py`
-    - This script will perform a number of cleaning functions on your teacher diversity data. In order for it to best serve your analysis:
-        - Look at it first
         - Remove any steps that don't serve you
         - Add cleaning steps you think are necessary 
-        - Edit the existing steps to reflect your data
-    - The "District Column Consistency" code is especially important, as it is a special place set aside for you to make sure that the column that you wish to perform any join functions on is consistent across all of your data. 
+        
+    - The "District Column Consistency" code is especially important, as it will allow you to make sure that the column you wish to perform any join functions on is consistent across all of your data.
 
-4. `join.py`
-5. `merge.py`
-6. `graphs.py`
-7. `table.py`
+### Technical Scripts
+4. `Join and Parity Index Scripts/join.py`
+- Conducts an outer join on the 'District' column your 3 cleaned pickle files. Joins grad data onto teacher data, and then student data onto the merged grad and teacher file. Saves the final result as a merged pickle file.
+5. `Join and Parity Index Scripts/parity_index.py`
+- Calculates teacher-student parity ratios by taking the share of X teachers and comparing it to the share of X students. Saves your final result as a pickle file.
 
+### Visualization Scripts
+6. `Visualization Scripts/graphs.py`
+- Visualization script thatreates 15 graphs. The first 3 are scatterplots that show the relationship between teacher-student parity and graduation rates over time.
 
+The next 12 are bar graphs that show the top 10 counties with: the highest and lowest parity ratios and the highest and lowest graduation rates. 
+7. `Visualization Scripts/table.py`
+- Visualization script that contains code to get yearly data from the district of your choosing. 
 
+#### Example Table (data is for Spartanburg County School District 1)
+    Year  District        Graduation Rate - W    Graduation Rate - B  
+    18    SPARTANBURG 1   0.911392               0.868421   
+    19    SPARTANBURG 1   0.912536               0.958333   
+    20    SPARTANBURG 1   0.935374               0.968750   
+    21    SPARTANBURG 1   0.929260               0.850000   
+    22    SPARTANBURG 1   0.937500               0.950000   
+    23    SPARTANBURG 1   0.936242               0.923077   
+
+    Graduation Rate - H  T-S Parity (W)  T-S Parity (B)  T-S Parity (H)  
+    1.000000             1.183992        0.387630        0.081281  
+    0.888889             1.182858        0.456084        0.083158  
+    1.000000             1.189535        0.417567        0.081933  
+    0.937500             1.202244        0.332662        0.075287  
+    0.956522             1.200411        0.289707        0.078736  
+    0.897436             1.186380        0.236211        0.192698  
 
  
+# Analysis/Results
 
+## Scatterplots
+### White 
+- When evaluating parity ratios, a parity score of 1 is best. It means that for every 1 White student, there's 1 White teacher. Being below this threshold means there are not enough teachers to account for students and being above means that...
 
+### Black
+
+### Hispanic
 
 
 
