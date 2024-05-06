@@ -67,7 +67,7 @@ plt.title('Student-Teacher Parity and Graduation Rates Overtime - H')
 ## Black - Bamberg 3 in all, Barnwell 48 in all, 
 
 
-#%%
+
 # Fourth and Fifth Graphs - Counties with the highest and lowest parity scores in 2023
 
 # Creating a dataframe that is only 2023
@@ -77,9 +77,11 @@ final_parity_w = final_2023.sort_values(by='S-T Parity (W)', ascending = False)
 final_parity_b = final_2023.sort_values(by='S-T Parity (B)', ascending = False)
 final_parity_h = final_2023.sort_values(by= 'S-T Parity (H)', ascending = False)
 
+#Visuals
 highest_parity_w = final_parity_w.head(10)
 highest_parity_w.set_index('District').plot(kind='bar', y = 'S-T Parity (W)')
 plt.ylabel('Parity Score')
+plt.title('Districts with the Highest Parity Scores - W')
 for i, parity in enumerate(highest_parity_w['S-T Parity (W)']):
         plt.text(i, parity, f"{parity:.2f}", ha='center', va='bottom', fontsize=10)
 plt.tight_layout()
@@ -92,14 +94,32 @@ final_grad_w = final_2023.sort_values(by='Graduation Rate - W', ascending = Fals
 final_grad_b = final_2023.sort_values(by='Graduation Rate - B', ascending = False)
 final_grad_h = final_2023.sort_values(by= 'Graduation Rate - H', ascending = False)
 
+# Visuals
 lowest_grad_w = final_grad_w.tail(10)
 lowest_grad_w.set_index('District').plot(kind='bar', y = 'Graduation Rate - W')
 plt.ylabel('Graduation Rate')
+plt.title('Districts with the Lowest Graduation Rates - W')
 for i, grad in enumerate(lowest_grad_w['Graduation Rate - W']):
         plt.text(i, parity, f"{grad:.2f}", ha='center', va='bottom', fontsize=10)
 plt.tight_layout()
 
-# Eighth visualization - Table
+
+highest_parity_b = final_parity_b.head(10)
+highest_parity_b.set_index('District').plot(kind='bar', y = 'S-T Parity (B)')
+plt.ylabel('Parity Score')
+plt.title('Districts with the Highest Parity Scores - B')
+for i, parity in enumerate(highest_parity_b['S-T Parity (B)']):
+        plt.text(i, parity, f"{parity:.2f}", ha='center', va='bottom', fontsize=10)
+plt.tight_layout()
+
+#%%
+lowest_grad_b = final_grad_b.tail(10)
+lowest_grad_b.set_index('District').plot(kind='bar', y = 'Graduation Rate - B')
+plt.ylabel('Graduation Rate')
+plt.title('Districts with the Lowest Graduation Rates - B')
+for i, grad in enumerate(lowest_grad_b['Graduation Rate - B']):
+        plt.text(i, parity, f"{grad:.2f}", ha='center', va='bottom', fontsize=10)
+
 
 
 
