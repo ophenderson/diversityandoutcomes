@@ -3,7 +3,6 @@ import pandas as pd
 import glob
 import os
 
-
 # Creating a list of all student files
 # I changed the name of the 2017-2018 student district data to make this easier!!
 student_files = glob.glob('raw/*District Headcount by Gender, Ethnicity and Pupils in Poverty*')
@@ -84,10 +83,6 @@ student_dataset['District'] = student_dataset['District'].replace({'ABBEVILLE 60
                                                                    'SUMTER 1':'SUMTER', 'UNION 1':'UNION', 
                                                                    'WILLIAMSBURG 1':'WILLIAMSBURG','HAMPTON':'HAMPTON 3'})
 
-
-
-
-# student_dataset['District'] = student_dataset['District'].str.replace(r' 1$','')
 
 # Saving as pickle file
 student_dataset.to_pickle('student.pkl')
