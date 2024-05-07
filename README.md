@@ -94,23 +94,47 @@ The next 12 are bar graphs that show the top 10 counties with: the highest and l
     0.897436             1.186380        0.236211        0.192698  
 
  
-# Analysis/Results
+## Analysis/Results
+My analysis and results did not yield results in alignment with my hypothesis. It seems that in South Carolina at least, teacher-student parity has little to no impact on student outcomes. Please see my 'Notes' section below for further discussion about future analysis. 
 
-## Scatterplots
+### Scatterplots  
+- When evaluating parity ratios, a parity score of 1 is best. It means that there's 1 teacher per student. When the ratio falls below 1, it signifies a disparity where there are fewer than 1 teacher per student, whereas when it exceeds 1, it indicates a situation where there are more than 1 teacher per student.
+For the purposes of this analysis, only points that had both a parity score and a graduation were plotted. Missing values are omitted. 
+
 ### White 
-- When evaluating parity ratios, a parity score of 1 is best. It means that for every 1 White student, there's 1 White teacher. Being below this threshold means there are not enough teachers to account for students and being above means that...
+- As you can see in this graph, almost all parity scores are above 1 - that there is a disproportionate ratio of White teachers to White students. Additionally, there is a large cluster of graduation rates between 80% and 100% suggesting that this disproportionality is having a positive impact on White student's outcomes. 
+
+- On the other hand, there is a slight negative relationship which shows that as disparities between White teachers and White students start to widen beyond 2.5, some graduation rates drop below 60%. This could suggest that larger disproprtionate ratios of White teachers to White students might actually be harming White students. 
 
 ### Black
+- When looking at the scatterplot for Black teachers to Black students, you can clearly see that most of the parity scores fall below 1. This means that in almost every district for the past 6 school years, the ratio of Black teachers to Black students has fallen short. 
+
+- Despite this fact, most graduation rates remain high with a majority of them being above 80%.
+
+- There are two very interesting outlier. The point from 2022 which shows the lowest graduation rate, but an almost perfect parity score. Additionally, the point from 2021 with one of the lowest parity scores but an almost perfect graduation rate. Obviously, we cannot base results on these outliers, but they were still very interesting to see. 
 
 ### Hispanic
+- For Hispanic students, there are no parity scores at or above 1. This means that at least in the padt 6 school years, the ratio of Hispanic teachers to Hispanic students has fallen short in every district. 
 
+- Additionally, while it doesn't say much about the impact of teacher-student parity on graduation rates, it says a lot about parity as a lone variable and how Black and Hispanic students outnumber their teachers and that the opposite is true for White Students. 
 
+- Once again, graduation rates remain quite high, with only a couple outliers dropping below 60%. 
+
+## Comparison of Top 10 Districts - Bar Graphs
+- For the next set of visualizations, I compare the 10 districts with the highest graduation rates to the 10 districts with the highest parity scores and the 10 districts with the lowest graduation rates to the 10 districts with the lowest parity scores.
+Because our parity score is calculated as the share of teachers to students, districts with the lowest parity scores should have the lowest graduation rates if teacher-student parity has an impact on graduation. The same should be the case with the highest partiy scores and graduation rates
+
+    - Among districts with the highest parity scores and the highest graduation rates, y. Darlington SD fell in the Top 10 graduation rates and the top 10 parity scores for Hispanic students. 
+
+    - Among districts with the lowest parity scores and the lowest graduation rates, there is overlap for Hispanic students in Jasper County School District, Spartanburg County School District 4, and Laurens County School District 56. All 3 districts fell in the bottom 10 parity scores and graduation rates for Hispanic students.
 
 # Notes
-[^1]: The counties of Bamberg, Barnwell, Orangeburg, and Hampton all experience consolidation between the 2017-2018 and 2022-2023 school years. This is accounted for in the data. 
+1. The districts of Bamberg, Barnwell, Orangeburg, and Hampton all experience consolidation between the 2017-2018 and 2022-2023 school years. This is accounted for in the data. 
 
-[^2]: Hispanic is a race rather than an ethnicity marker in this data. 
+2.  Hispanic is a race rather than an ethnicity marker in this data. 
 
-[^3]: Other races are included in the data but, alot of their data is missing. Hence, they are removed from the analysis. If you wish to conduct a more extensive analysis that includes other races, you would just simply add their column names to any keep_cols code. 
+3. Other races are included in the data but, alot of their data is missing. Hence, they are removed from the analysis. If you wish to conduct a more extensive analysis that includes other races, you would just simply add their column names to any keep_cols code. 
 
-[^4]: Special schools (career schools, governor's schools, schools run through the department of corrections and juvenile justice, etc) are removed. If you wish to add these back, just take out the lines of code that removes them. 
+4. Special schools (career schools, governor's schools, schools run through the department of corrections and juvenile justice, etc) are removed. If you wish to add these back, just take out the lines of code that removes them. 
+
+5. As I mentioned in my 'Analysis/Results' section, there seems to be little to no relationship between parity and graduation rates. Future analysis might look at: 1. Other student outcomes (enrollment in some sort of post-secondary education, standardized test scores, etc), 2. account for omitted variables, 3. look at different states.  
