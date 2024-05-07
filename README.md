@@ -65,6 +65,7 @@ Scripts should be run in the order that they appear below.
 ### Technical Scripts
 4. `Join and Parity Index Scripts/join.py`
 - Conducts an outer join on the 'District' column your 3 cleaned pickle files. Joins grad data onto teacher data, and then student data onto the merged grad and teacher file. Saves the final result as a merged pickle file.
+
 5. `Join and Parity Index Scripts/parity_index.py`
 - Calculates teacher-student parity ratios by taking the share of X teachers and comparing it to the share of X students. Saves your final result as a pickle file.
 
@@ -72,7 +73,8 @@ Scripts should be run in the order that they appear below.
 6. `Visualization Scripts/graphs.py`
 - Visualization script thatreates 15 graphs. The first 3 are scatterplots that show the relationship between teacher-student parity and graduation rates over time.
 
-The next 12 are bar graphs that show the top 10 counties with: the highest and lowest parity ratios and the highest and lowest graduation rates. 
+- The next 12 are bar graphs that show the top 10 counties with: the highest and lowest parity ratios and the highest and lowest graduation rates. 
+
 7. `Visualization Scripts/table.py`
 - Visualization script that contains code to get yearly data from the district of your choosing. 
 
