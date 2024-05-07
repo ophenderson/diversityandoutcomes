@@ -1,5 +1,5 @@
-# Diversity and Outcomes
-## What's does this repository do? (B.L.U.F.)
+# Parity and Outcomes
+## What's does this repository do? 
  
  This repository conducts an analysis of student-teacher parity and its impact on graduation rates for the state of South Carolina between 2018-2023. Scripts allow users to process and visualize data. My hope for this repository is that it provide school districts, education analysts, and anyone else interested in education topics with a method to take a state of their choosing and measure the impact of student-teacher parity (or the lack thereof) on student outcomes, specifically graduation rates.
 
