@@ -30,12 +30,12 @@ Note: **Make sure your data is separated by district.**
 
 In this repository, you'll find 7 scripts, 3 dedicated to cleaning student, teacher, and graduation rate data, 1 dedicated to joining that cleaned data together, 1 dedicated to calculating parity ratios, and 2 dedicated to creating visualizations. 
 
-Input data and outputs for this repository are all organized into labeled folders. Before you start running scripts, you should gather all of your necessary input data and organize it into a folder called 'raw'.
+Input data for this repository is organized into la folder labled `raw`. Before you start running scripts, you should gather all of your necessary input data and organize it into a folder called 'raw'.
 
 Scripts should be run in the order that they appear below. 
 
 ### Data Cleaning Scripts 
-1. `Cleaning Scripts/clean_grad.py` 
+1. `clean_grad.py` 
     - This script will pull graduation rate files from your 'raw' folder, perform a number of cleaning functions on your the data, and save your final cleaned dataframe as a pickle file. In order for this script to best serve your analysis:
         - Look it over 
         - Edit the existing steps to reflect your data
@@ -44,7 +44,7 @@ Scripts should be run in the order that they appear below.
         
     - The "District Column Consistency" code is especially important, as it will allow you to make sure that the column you wish to perform any join functions on is consistent across all of your data.
 
-2. `Cleaning Scripts/clean_student.py`
+2. `clean_student.py`
     - This script will pull student headcount files from your 'raw' folder, perform a number of cleaning functions on your the data, and save your final cleaned dataframe as a pickle file. In order for this script to best serve your analysis:
         - Look it over 
         - Edit the existing steps to reflect your data
@@ -53,7 +53,7 @@ Scripts should be run in the order that they appear below.
         
     - The "District Column Consistency" code is especially important, as it will allow you to make sure that the column you wish to perform any join functions on is consistent across all of your data.
 
-3. `Cleaning Scripts/clean_teacher.py`
+3. `clean_teacher.py`
     This script will pull teacher diversity files from your 'raw' folder, perform a number of cleaning functions on your the data, and save your final cleaned dataframe as a pickle file. In order for this script to best serve your analysis:
         - Look it over 
         - Edit the existing steps to reflect your data
@@ -63,20 +63,20 @@ Scripts should be run in the order that they appear below.
     - The "District Column Consistency" code is especially important, as it will allow you to make sure that the column you wish to perform any join functions on is consistent across all of your data.
 
 ### Technical Scripts
-4. `Join and Parity Index Scripts/join.py`
+4. `join.py`
 - Conducts an outer join on the 'District' column your 3 cleaned pickle files. Joins grad data onto teacher data, and then student data onto the merged grad and teacher file. Saves the final result as a merged pickle file.
 
-5. `Join and Parity Index Scripts/parity_index.py`
+5. `parity_index.py`
 - Calculates teacher-student parity ratios by taking the share of X teachers and comparing it to the share of X students. Saves your final result as a pickle file.
 
 ### Visualization Scripts
-6. `Visualization Scripts/graphs.py`
+6. `graphs.py`
 - Visualization script thatreates 15 graphs. The first 3 are scatterplots that show the relationship between teacher-student parity and graduation rates over time.
 
 - The next 12 are bar graphs that show the top 10 counties with: the highest and lowest parity ratios and the highest and lowest graduation rates. 
 
-7. `Visualization Scripts/table.py`
-- Visualization script that contains code to get yearly data from the district of your choosing. 
+7. `table.py`
+- Visualization script that contains code to get yearly data from the district of your choosing. Be sure to put line 9 in the console to get output. 
 
 #### Example Table (data is for Spartanburg County School District 1)
     Year  District        Graduation Rate - W    Graduation Rate - B  
