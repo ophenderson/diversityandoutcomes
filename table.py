@@ -9,3 +9,4 @@ pd.set_option('display.max.columns', None)
 final[final['District'] == 'SPARTANBURG 1'][['Year', 'District', 'Graduation Rate - W', 'Graduation Rate - B', 
                                              'Graduation Rate - H', 'T-S Parity (W)', 'T-S Parity (B)', 'T-S Parity (H)']]
 
+# Run the first 2 lines and then put line 9 into your python console to run it!

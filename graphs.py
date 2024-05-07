@@ -96,7 +96,7 @@ plt.title('Districts with the Lowest Parity Scores - B')
 plt.tight_layout()
 plt.legend().remove()
 plt.savefig('LparityB.png')
-#%%
+
 # Bar - Top 10 Districts with the Lowest Teacher-Student parity (Hispanic)
 # Original 10 had parity scores of 0, meaning they have 0 hispanic teachers
 lowest_parity_h = final_parity_h[final_parity_h != 0].dropna().tail(10)
@@ -108,7 +108,7 @@ plt.title('Districts with the Lowest Parity Scores - H')
 plt.tight_layout()
 plt.legend().remove()
 plt.savefig('LparityH.png')
-#%%
+
 # Sorting graduation rates in descending order
 final_grad_w = final_2023.sort_values(by='Graduation Rate - W', ascending = False)
 final_grad_b = final_2023.sort_values(by='Graduation Rate - B', ascending = False)
